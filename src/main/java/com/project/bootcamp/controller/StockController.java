@@ -1,6 +1,8 @@
 package com.project.bootcamp.controller;
 
 import com.project.bootcamp.model.dto.StockDTO;
+import com.project.bootcamp.service.StockService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +17,15 @@ import java.util.List;
 @RequestMapping(value = "/stock")
 //this refers to the command to ask for this class GET, POST, PUT, DELETE, UPDATE
 public class StockController {
+
+    //Connect to database
+    @Autowired
+    private StockService service;
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StockDTO> save(@Valid @RequestBody StockDTO dto){
         //Takes care of receiving Post data, with an StockDTO object
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(service.save(dto));
         //Sane as a 200 http code
     }
 

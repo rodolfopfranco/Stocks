@@ -3,14 +3,14 @@ package com.project.bootcamp.model;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+
 @Entity
 @Table(name = "tb_stock")
-
 public class Stock {
     //This notation makes the link between the variable here and the attribute on table
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="code")
+    @Column(name="id")
     private Long id;
 
     @Column(name = "name")
