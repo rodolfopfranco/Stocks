@@ -6,16 +6,20 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://127.0.0.1:5432/auladb
-    username: postgres
-    password: 12345
+    url: postgres://kqappodeztnrma:640eb9e5b4f203b60f7fb8f20cee6b4450623949eedb0899c70eb1ef9ecf8231@ec2-174-129-225-160.compute-1.amazonaws.com:5432/d60gn6qa7shkg8
+    username: kqappodeztnrma
+    password: 640eb9e5b4f203b60f7fb8f20cee6b4450623949eedb0899c70eb1ef9ecf8231
+    #localhost data:
+    #url: jdbc:postgresql://127.0.0.1:5432/auladb
+    #username: postgres
+    #password: 12345
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-    generate-ddl: false
+    generate-ddl: true
     hibernate:
       ddl-auto: none
 
 application:
-  description: "Project created for Santander's DIO Bootcamp in 30/05/2021"
-  version: "1.0"
+  description: Project created for Santander's DIO Bootcamp in 30/05/2021
+  version: 1.0
