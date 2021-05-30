@@ -4,6 +4,9 @@ import com.project.bootcamp.model.Stock;
 import com.project.bootcamp.model.dto.StockDTO;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class StockMapper {
 
@@ -15,6 +18,11 @@ public class StockMapper {
         dto.setVariation(stock.getVariation());
         dto.setDate(stock.getDate());
         return dto;
+    }
+
+    public List<StockDTO> toDto(List<Stock> listStock){
+        //returns the list through stream using toDto method
+        return listStock.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     public Stock toEntity(StockDTO dto){

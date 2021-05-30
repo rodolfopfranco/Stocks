@@ -8,11 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.xml.ws.Response;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
+//CrossOrigin allows the backend to be accessed on production
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/stock")
 //this refers to the command to ask for this class GET, POST, PUT, DELETE, UPDATE
@@ -31,11 +30,13 @@ public class StockController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StockDTO> update(@Valid @RequestBody StockDTO dto) {
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(service.update(dto));
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StockDTO>> findAll(){
+        return ResponseEntity.ok(service.findAll());
+        /*PREVIOUS MOCK DATA:
         List<StockDTO> list = new ArrayList<>();
         StockDTO dto = new StockDTO();
         dto.setId(1L);
@@ -44,13 +45,14 @@ public class StockController {
         dto.setVariation(10D);
         dto.setDate(LocalDate.now());
         list.add(dto);
-        return ResponseEntity.ok(list);
+        return ResponseEntity.ok(list);*/
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<StockDTO> findById(@PathVariable Long id){
         //gets response using specific ID
-        //After this, a list simulation to search the ID.
+        return ResponseEntity.ok(service.findById(id));
+        /*PREVIOUS MOCK DATA:
         List<StockDTO> list = new ArrayList<>();
         StockDTO stock1 = new StockDTO();
         stock1.setId(1L);
@@ -66,9 +68,17 @@ public class StockController {
         stock2.setVariation(20D);
         stock2.setDate(LocalDate.now());
         list.add(stock2);
-
         StockDTO dtoSelect = list.stream().filter(x->x.getId().compareTo(id) == 0).findFirst().get();
-        return ResponseEntity.ok(dtoSelect);
+        return ResponseEntity.ok(dtoSelect);*/
     }
 
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<StockDTO> delete(@PathVariable Long id){
+        return ResponseEntity.ok(service.delete(id));
+    }
+
+    @GetMapping(value = "/today")
+    public ResponseEntity<List<StockDTO>> findByToday(){
+        return ResponseEntity.ok(service.findByToday());
+    }
 }
